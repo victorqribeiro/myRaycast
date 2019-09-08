@@ -138,6 +138,11 @@ document.addEventListener("keyup",e=>{
 
 if( ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) ){
 
+	const resetEverything = function(){
+		if(ray.isTurningLeft) ray.isTurningLeft = false;
+		if(ray.isTurningRight) ray.isTurningRight = false;
+	}
+
 	const menuSettings = {
 		innerCircle: 0,
 		outerCircle: 60,
@@ -146,10 +151,10 @@ if( ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf
 		posY: innerHeight-140, 
 		rotation: Math.PI/4, 
 		buttons: [
-			{text: '\uf063', action: ()=>{ if(ray.isBacking) ray.isBacking = false; else ray.isBacking = true; } }, /*down*/
-			{text: '\uf060', action: ()=>{ if(ray.isTurningLeft) ray.isTurningLeft = false; else ray.isTurningLeft = true; } }, /*left*/
-			{text: '\uf062', action: ()=>{ if(ray.isMoving) ray.isMoving = false; else ray.isMoving = true; } }, /*up*/
-			{text: '\uf061', action: ()=>{ if(ray.isTurningRight) ray.isTurningRight = false; else ray.isTurningRight = true; } }, /*right*/
+			{text: '\uf063', action: ()=>{ resetEverything(); if(ray.isBacking) ray.isBacking = false; else ray.isBacking = true; } },
+			{text: '\uf060', action: ()=>{ if(ray.isTurningLeft) ray.isTurningLeft = false; else ray.isTurningLeft = true; } },
+			{text: '\uf062', action: ()=>{ resetEverything(); if(ray.isMoving) ray.isMoving = false; else ray.isMoving = true; } },
+			{text: '\uf061', action: ()=>{ if(ray.isTurningRight) ray.isTurningRight = false; else ray.isTurningRight = true; } }
 		]
 	};
 
