@@ -74,12 +74,14 @@ const loop = function(){
 		c.arc(p.x, p.y, 3, 0, Math.PI*2);
 		c.fill();
 		{
+			const textStep = (texture.width / points.length);
+			//console.log( l*texture.width, textStep ); return;
 			const hs = Math.sqrt( (ray.pos.x-p.x)**2 + (ray.pos.y-p.y)**2 ) * Math.cos( ray.a - a );
 			c2.drawImage(
 				texture,
-				(l*texture.width*40)%texture.width*l,
+				(l*texture.width*20)%texture.width/2,
 				0,
-				ws,
+				textStep,
 				texture.height/2,
 				i*ws,
 				(h/2-hs/2)+h/2/2,
