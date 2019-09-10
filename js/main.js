@@ -9,12 +9,6 @@ c2 = canvas2.getContext('2d');
 document.body.appendChild( canvas );
 document.body.appendChild( canvas2 );
 
-const texture = new Image();
-texture.src = "red_brick_wall.jpg";
-texture.onload = ()=>{
-	loop();
-};
-
 const lines = [
 	{
 		start: {x: w/2+w/2/2, y: 0},
@@ -170,6 +164,17 @@ if( ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf
 		]
 	};
 
-	const radial = new RadialMenu(menuSettings);
+	document.fonts.ready.then(function() {
+		radial = new RadialMenu(menuSettings);
+	});
+
 	
 }
+
+const texture = new Image();
+texture.src = "red_brick_wall.jpg";
+texture.onload = ()=>{
+	loop();
+	if( radial )
+		radial.show() /* ugly fix */
+};
