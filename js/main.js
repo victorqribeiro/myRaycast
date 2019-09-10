@@ -57,7 +57,7 @@ const draw = function(){
 	}
 	ray.show();
 }
-
+//_ = 0;
 const loop = function(){
 	draw();
 	ray.update();
@@ -74,22 +74,32 @@ const loop = function(){
 		c.arc(p.x, p.y, 3, 0, Math.PI*2);
 		c.fill();
 		{
-			const textStep = (texture.width / points.length);
-			//console.log( l*texture.width, textStep ); return;
+			const textStep = Math.ceil(texture.width / points.length);
 			const hs = Math.sqrt( (ray.pos.x-p.x)**2 + (ray.pos.y-p.y)**2 ) * Math.cos( ray.a - a );
+			ini = (l*textStep*texture.width)%texture.width;
+			
 			c2.drawImage(
 				texture,
-				(l*texture.width*20)%texture.width/2,
+				ini,
 				0,
-				textStep,
+				ini + textStep >= texture.width ? texture.width - (ini + textStep) : textStep,
 				texture.height/2,
 				i*ws,
-				(h/2-hs/2)+h/2/2,
+				(hs-h)/2+h/2,
 				ws,
-				Math.min(hs-h/2,0)
+				h-hs
 			);
-			c2.fillStyle = "rgba(0,0,0,"+hs/h+")";
-			c2.fillRect(i*Math.ceil(ws),(h/2-hs/2)+h/2/2,Math.ceil(ws),Math.min(hs-h/2,0));
+			
+			
+			c2.fillStyle = "rgba(0,0,0,"+(hs/h)+")";
+			c2.fillRect(i*ws,(hs-h)/2+h/2,ws,h-hs);
+			
+			/*
+			console.log(  );
+			if( _ >= 20	 )
+				return;
+			_++
+			*/
 		}
 	}
 	window.requestAnimationFrame( loop );
