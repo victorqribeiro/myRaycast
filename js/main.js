@@ -81,12 +81,12 @@ const loop = function(){
 				i*ws,
 				(hs-h)/2+h/2,
 				ws,
-				h-hs
+				Math.max(h-hs,0)
 			);
 			
 			
 			c2.fillStyle = "rgba(0,0,0,"+(hs/h)+")";
-			c2.fillRect(i*ws,(hs-h)/2+h/2,ws,h-hs);
+			c2.fillRect(i*ws,(hs-h)/2+h/2,ws,Math.max(h-hs,0));
 			
 			/*
 			console.log(  );
