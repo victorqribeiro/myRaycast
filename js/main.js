@@ -15,8 +15,8 @@ const lines = [
 		end: {x: w/2+w/2/2, y: h}
 	},
 	{
-		start: {x: w/2/2, y: 0},
-		end: {x: w/2/2, y: h}
+		start: {x: w/2/2, y: h},
+		end: {x: w/2/2, y: 0}
 	},
 	{
 		start: {x: 10, y: 10},
