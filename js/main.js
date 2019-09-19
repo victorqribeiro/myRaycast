@@ -9,6 +9,8 @@ c2 = canvas2.getContext('2d');
 document.body.appendChild( canvas );
 document.body.appendChild( canvas2 );
 
+radial = null;
+
 const lines = [
 	{
 		start: {x: w/2+w/2/2, y: h/10},
@@ -69,15 +71,15 @@ const loop = function(){
 		c.arc(p.x, p.y, 3, 0, Math.PI*2);
 		c.fill();
 		{
-			const textStep = Math.floor(texture.width / points.length);
+			const textStep = Math.ceil(texture.width / t) * 2;
 			const hs = Math.sqrt( (ray.pos.x-p.x)**2 + (ray.pos.y-p.y)**2 ) * Math.cos( ray.a - a );
-			ini = Math.floor(l*textStep*t)%texture.width;
+			ini = Math.ceil(l*textStep*t)%texture.width;
 			
 			c2.drawImage(
 				texture,
 				ini,
 				0,
-				textStep,
+				ini+textStep > texture.width ? texture.width-ini : textStep,
 				texture.height/2,
 				i*ws,
 				(hs-h)/2+h/2,
@@ -91,7 +93,7 @@ const loop = function(){
 			
 			/*
 			if( _ >= 69	 ){
-				console.log( ini, texture.width );
+				console.log( ini, texture.width-ini );
 				return;
 			}
 			_++
