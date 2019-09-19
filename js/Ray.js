@@ -52,7 +52,7 @@ class Ray {
 	lookAt( lines ){
 		const arr = [];
 		for(let i = this.a - this.FOV/2, end = i + this.FOV; i < end; i+= 0.005){
-			let maxDist = Infinity, _p = null, texture = null, l = null;
+			let maxDist = Infinity, _p = null, texture = null, l = null, total;
 			for(const line of lines){
 				const p = this.intersect(
 						{start: { x: this.pos.x, y: this.pos.y } , end: {x: this.pos.x + Math.cos(i) * w, y: this.pos.y + Math.sin(i) * w} },
@@ -63,11 +63,12 @@ class Ray {
 					if( d < maxDist ){
 						maxDist = d
 						_p = p;
-						l = Math.sqrt( (p.x-line.start.x) ** 2 + (p.y-line.start.y) ** 2 ) / Math.sqrt( (line.end.x-line.start.x) ** 2 + (line.end.y-line.start.y) ** 2 );
+						total = Math.sqrt( (line.end.x-line.start.x) ** 2 + (line.end.y-line.start.y) ** 2 );
+						l = Math.sqrt( (p.x-line.start.x) ** 2 + (p.y-line.start.y) ** 2 ) / total;
 					}
 				}
 			}
-			arr.push( {'p': _p, 'a': i, 'l': l} );
+			arr.push( {'p': _p, 'a': i, 'l': l, 't': total} );
 		}
 		return arr;
 	}

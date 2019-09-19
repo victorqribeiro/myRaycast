@@ -11,24 +11,24 @@ document.body.appendChild( canvas2 );
 
 const lines = [
 	{
-		start: {x: w/2+w/2/2, y: 0},
-		end: {x: w/2+w/2/2, y: h}
+		start: {x: w/2+w/2/2, y: h/10},
+		end: {x: w/2+w/2/2, y: h-h/10}
 	},
 	{
-		start: {x: w/2/2, y: h},
-		end: {x: w/2/2, y: 0}
+		start: {x: w/2/2, y: h-h/10},
+		end: {x: w/2/2, y: h/3}
 	},
 	{
-		start: {x: 10, y: 10},
-		end: {x: w-10, y: 10}
+		start: {x: w-(w/2/2), y: h-h/10},
+		end: {x: w/2/2, y: h-h/10}
 	},
 	{
-		start: {x: w-10, y: h-10},
-		end: {x: 10, y: h-10}
+		start: {x: w/2/2+w/5, y: h/10},
+		end: {x: w-(w/2/2), y: h/10}
 	},
 	{
-		start: {x: 100, y: 300},
-		end: {x: 300, y: 200}
+		start: {x: w/2/2, y: h/3},
+		end: {x: w/2/2+w/5, y: h/10}
 	}
 ]
 
@@ -51,7 +51,7 @@ const draw = function(){
 	}
 	ray.show();
 }
-//_ = 0;
+_ = 0;
 const loop = function(){
 	draw();
 	ray.update();
@@ -61,6 +61,7 @@ const loop = function(){
 		const p = points[i].p;
 		const a = points[i].a;
 		const l = points[i].l;
+		const t = points[i].t;
 		if( !p )	
 			continue
 		c.fillStyle = "red";
@@ -68,15 +69,15 @@ const loop = function(){
 		c.arc(p.x, p.y, 3, 0, Math.PI*2);
 		c.fill();
 		{
-			const textStep = Math.ceil(texture.width / points.length);
+			const textStep = Math.floor(texture.width / points.length);
 			const hs = Math.sqrt( (ray.pos.x-p.x)**2 + (ray.pos.y-p.y)**2 ) * Math.cos( ray.a - a );
-			ini = (l*textStep*texture.width)%texture.width;
+			ini = Math.floor(l*textStep*t)%texture.width;
 			
 			c2.drawImage(
 				texture,
 				ini,
 				0,
-				ini + textStep >= texture.width ? texture.width - (ini + textStep) : textStep,
+				textStep,
 				texture.height/2,
 				i*ws,
 				(hs-h)/2+h/2,
@@ -89,9 +90,10 @@ const loop = function(){
 			c2.fillRect(i*ws,(hs-h)/2+h/2,ws,Math.max(h-hs,0));
 			
 			/*
-			console.log(  );
-			if( _ >= 20	 )
+			if( _ >= 69	 ){
+				console.log( ini, texture.width );
 				return;
+			}
 			_++
 			*/
 		}
