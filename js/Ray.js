@@ -65,10 +65,11 @@ class Ray {
 						_p = p;
 						total = Math.sqrt( (line.end.x-line.start.x) ** 2 + (line.end.y-line.start.y) ** 2 );
 						l = Math.sqrt( (p.x-line.start.x) ** 2 + (p.y-line.start.y) ** 2 ) / total;
+						texture = line.texture;
 					}
 				}
 			}
-			arr.push( {'p': _p, 'a': i, 'l': l, 't': total} );
+			arr.push( {'p': _p, 'a': i, 'l': l, 't': total, 'texture': texture} );
 		}
 		return arr;
 	}

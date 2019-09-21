@@ -11,26 +11,48 @@ document.body.appendChild( canvas2 );
 
 radial = null;
 
+let count = 0;
+
+const redBrick = new Image();
+redBrick.src = "red_brick_wall.jpg";
+redBrick.onload = ()=>{
+	count++;
+	allDone();
+};
+
+const stoneWall = new Image();
+stoneWall.src = "stone+wall-512x512.png";
+stoneWall.onload = ()=>{
+	count++;
+	allDone();
+}
+
+
 const lines = [
 	{
 		start: {x: w/2+w/2/2, y: h/10},
-		end: {x: w/2+w/2/2, y: h-h/10}
+		end: {x: w/2+w/2/2, y: h-h/10},
+		texture: redBrick
 	},
 	{
 		start: {x: w/2/2, y: h-h/10},
-		end: {x: w/2/2, y: h/3}
+		end: {x: w/2/2, y: h/3},
+		texture: redBrick
 	},
 	{
 		start: {x: w-(w/2/2), y: h-h/10},
-		end: {x: w/2/2, y: h-h/10}
+		end: {x: w/2/2, y: h-h/10},
+		texture: redBrick
 	},
 	{
 		start: {x: w/2/2+w/5, y: h/10},
-		end: {x: w-(w/2/2), y: h/10}
+		end: {x: w-(w/2/2), y: h/10},
+		texture: redBrick
 	},
 	{
 		start: {x: w/2/2, y: h/3},
-		end: {x: w/2/2+w/5, y: h/10}
+		end: {x: w/2/2+w/5, y: h/10},
+		texture : stoneWall
 	}
 ]
 
@@ -64,6 +86,7 @@ const loop = function(){
 		const a = points[i].a;
 		const l = points[i].l;
 		const t = points[i].t;
+		const texture = points[i].texture;
 		if( !p )	
 			continue
 		c.fillStyle = "red";
@@ -175,10 +198,10 @@ if( ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf
 	
 }
 
-const texture = new Image();
-texture.src = "red_brick_wall.jpg";
-texture.onload = ()=>{
+function allDone(){
+	if( count < 2 )
+		return
 	loop();
 	if( radial )
 		radial.show() /* ugly fix */
-};
+}
