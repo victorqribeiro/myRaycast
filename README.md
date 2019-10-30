@@ -3,7 +3,7 @@ A JavaScript [Ray casting](https://en.wikipedia.org/wiki/Ray_casting) engine I'm
 
 [![Ray Casting](https://img.youtube.com/vi/b8A3mdn-tPw/0.jpg)](https://www.youtube.com/watch?v=b8A3mdn-tPw)
 
-[Live Version](https://victorribeiro.com/myRaycast/)
+[Live Version](https://victorribeiro.com/myRaycast/) | [Alternative Link](https://victorqribeiro.github.io/myRaycast/)
 
 
 ## About
